@@ -21,7 +21,6 @@ mm <- model.matrix( ~ college - 1, data= data_lm )
 data <- cbind(data_lm, mm) %>% as_tibble()
 ```
 
-
 ```{r message = FALSE, warning = FALSE, echo = FALSE}
 model <- lm(formula= Attnd_Rate ~ support_rate + nonobj_Rate*competitive + vote_rate + competitive + void_rate + college_population_rate,
             data=data)
