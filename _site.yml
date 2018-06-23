@@ -1,4 +1,5 @@
 name: "NTUSC"
+output_dir: "."
 navbar:  
   title: "NTUSC Attendance Rate Open Data"
   left:  # you can also use 'right'
