@@ -238,7 +238,7 @@ $(document).ready(function () {
 
 <div id="brief-introduction" class="section level3">
 <h3><strong>Brief Introduction</strong></h3>
-<p>資料主要有二份，一份是台大學代出席資料，另一份則是台大學代投票資料。前者可以從台大學代會的臉書搜尋而得，後則可以從台大選委會的臉書搜尋而得，但因為有些已經是歷史資料，所以我直接向粉絲專頁傳送訊息，兩方的小編都直接幫我將檔案找出了，非常感謝他們。</p>
+<p>由於最重要的變數為學代出席率，因此我嘗試尋找兩份資料當中的變數與學貸出席率的關係。我用了院別、年級、任期、各式投票率如廢票率、支持率、院別人口比例等，很遺憾的是所有線性回歸模型的解釋能力都有點差，所以底下就直接呈現其中幾個(失敗的)模型。</p>
 <pre><code>## 
 ## Call:
 ## lm(formula = Attnd_Rate ~ support_rate + nonobj_Rate * competitive + 
