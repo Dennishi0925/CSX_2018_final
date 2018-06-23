@@ -219,6 +219,13 @@ $(document).ready(function () {
     Communicating
   </a>
 </li>
+<li>
+  <a href="shiny_thanks.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Shiny &amp; Thanks
+  </a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -238,17 +245,17 @@ $(document).ready(function () {
 
 <div id="data-importing-tidying---ntusc-attendance-data" class="section level3">
 <h3><strong>Data Importing &amp; Tidying - NTUSC Attendance Data</strong></h3>
-<p>NA</p>
+<p>台大學代出席資料的原始檔案放在 google spreadsheet上，下載下來為 excel 的 xlsx 格式，因為有些期數的資料缺失，因此我到 PTT NTUSC 版上尋找學代會議的紀錄，再依照出缺席名單比對後抄寫至 excle 中。我先在 excel 當中依照後續分析與呈現的需要進行簡單的資料處理，如判斷學代是否有出席、將欄位改成英文名稱、取捨變數等等(判斷出席與缺席時間 missing value 過多且用處不大故捨棄)，完成後另存為 csv 丟進 R 裡面繼續處理。</p>
 <div class="figure">
 <img src="data_import_xlsx.png" alt="xlsx data of 104-1 NTUSC Attendance Data" />
 <p class="caption"><strong>xlsx data of 104-1 NTUSC Attendance Data</strong></p>
 </div>
-<p>NA</p>
+<p>丟進 R 之後使用 R 的函數進行整理，和 excel 的最大差別是能夠利用程式的特性減少重複的工作。最後將其整理成下方的data frame。</p>
 <div class="figure">
 <img src="data_import_R.png" alt="data frame of 106-1 NTUSC Attendance Data" />
 <p class="caption"><strong>data frame of 106-1 NTUSC Attendance Data</strong></p>
 </div>
-<p>NA</p>
+<p>上方的資料框原本是寬表格(wide)，因為分析需要，使用<code>tidyr</code>將其轉換成長表格。</p>
 <div class="figure">
 <img src="data_tidy_R.png" alt="long table of 106-1 NTUSC Attendance Data" />
 <p class="caption"><strong>long table of 106-1 NTUSC Attendance Data</strong></p>
@@ -256,7 +263,7 @@ $(document).ready(function () {
 </div>
 <div id="data-importing-tidying---ntusc-vote-data" class="section level3">
 <h3><strong>Data Importing &amp; Tidying - NTUSC Vote Data</strong></h3>
-<p>NA</p>
+<p>台大學代投票資料的原始檔案格式為 PDF，雖然可以使用 word 開啟，但因為原始表格的設計，所以有些資料無法複製貼上，需要手動輸入，更有甚者，104-1的選舉公報完全缺失，所以要去 PTT NTU 版上的貼文抄寫，非常麻煩，在此花上不少時間。</p>
 <div class="figure">
 <img src="data_import_PDF01.png" alt="PDF of 104-1 NTUSC candidate Vote Data" />
 <p class="caption"><strong>PDF of 104-1 NTUSC candidate Vote Data</strong></p>
@@ -265,7 +272,7 @@ $(document).ready(function () {
 <img src="data_import_PDF02.png" alt="PDF of 104-1 NTUSC college Vote Data" />
 <p class="caption"><strong>PDF of 104-1 NTUSC college Vote Data</strong></p>
 </div>
-<p>NA</p>
+<p>如上圖所見，資料主要有兩個部分，其一是每位候選人的得票資料，其二為每個學院的得票資料。將其整理在 excel 當中後，我將資料轉存成 csv，在R當中讀取後進行整合。</p>
 <div class="figure">
 <img src="data_import_R02.png" alt="data frame of 104-1 NTUSC candidate Vote Data" />
 <p class="caption"><strong>data frame of 104-1 NTUSC candidate Vote Data</strong></p>
@@ -274,7 +281,7 @@ $(document).ready(function () {
 <img src="data_import_R03.png" alt="data frame of 104-1 NTUSC Attendance Data" />
 <p class="caption"><strong>data frame of 104-1 NTUSC Attendance Data</strong></p>
 </div>
-<p>NA</p>
+<p>我使用<code>dplyr</code>當中的合併相關函數(<code>left_join</code>)，將兩筆資料整合在一起。下圖是資料joining後的結果。</p>
 <div class="figure">
 <img src="data_tidy_R02.png" alt="data frame of 104-1 NTUSC full Vote Data" />
 <p class="caption"><strong>data frame of 104-1 NTUSC full Vote Data</strong></p>
@@ -282,7 +289,7 @@ $(document).ready(function () {
 </div>
 <div id="data-transforming" class="section level3">
 <h3><strong>Data Transforming</strong></h3>
-<p>NA</p>
+<p>接下來透過<code>dplyr</code>, <code>stringr</code>, <code>forcats</code>等<code>tidyverse</code>大家庭下的套件，使用<code>mutate</code>, <code>group_by</code>, <code>counte</code>,<code>summarise</code>,<code>if_else</code>等函數將上述兩以資料清理乾淨，並且也對資料進行簡單的敘述性統計觀察，以利後續的分析。</p>
 </div>
 
 
