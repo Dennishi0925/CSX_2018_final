@@ -20,9 +20,10 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -31,10 +32,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -69,9 +72,7 @@ h6 {
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -90,8 +91,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -107,7 +114,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -127,6 +133,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -148,19 +191,85 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -185,22 +294,46 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="scope.html">Scope</a>
+  <a href="scope.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Scope
+  </a>
 </li>
 <li>
-  <a href="data_processing.html">Processing</a>
+  <a href="data_processing.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Processing
+  </a>
 </li>
 <li>
-  <a href="data_visualizing.html">Visualizing</a>
+  <a href="data_visualizing.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Visualizing
+  </a>
 </li>
 <li>
-  <a href="data_modeling.html">Modeling</a>
+  <a href="data_modeling.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Modeling
+  </a>
 </li>
 <li>
-  <a href="data_communicating.html">Communicating</a>
+  <a href="data_communicating.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Communicating
+  </a>
 </li>
 <li>
-  <a href="shiny_thanks.html">Shiny &amp; Thanks</a>
+  <a href="shiny_thanks.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Shiny &amp; Thanks
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -221,23 +354,22 @@ $(document).ready(function () {
 
 <div id="ntusc-shiny-app" class="section level3">
 <h3><strong>NTUSC Shiny APP</strong></h3>
-<p>點下 <a href="https://dennistseng.shinyapps.io/NTUSCapp/"><strong><code>NTUSC app</code></strong></a> 就可以看到最後 shiny app的成果了。</p>
+<p>點下 <a href="https://dennistseng.shinyapps.io/NTUSCapp/"><strong>NTUSC app</strong></a> 就可以看到最後 shiny app的成果了。</p>
 </div>
 <div id="thank-you-all" class="section level3">
 <h3><strong>Thank you all</strong></h3>
-<p>最後我想要感謝老師與助教-</p>
-<p><code>pecu</code>: 謝謝老師帶我深入 R 的世界，自學有時候很煩可是做出來真的超有成就感的啦<br />
-<code>kbjiyu</code>: 謝謝助教常常回答問題，最後要做 shiny 的時候也給我很多意見</p>
-<p>接下來是與這份報告有關的人-</p>
-<p><code>臺元</code>: 謝謝臺元幫我釐清非常的疑惑，要資料、欄位解釋、學代生態等，有太大的幫助<br />
-<code>選委會與學代會小編</code>: 兩邊的小編都直接幫我找歷史檔案，真的很謝謝你們</p>
-<p>然後是這些人雖然跟這堂課無關，可是他們在大三下扮演了很重要的角色，希望可以繼續-</p>
-<p><code>Dennis</code>: 這是我自己，我好棒喔 <a href="">#我的大叔</a><br />
-<code>Daniel</code>: 高中以來的好朋友，我猜你現在看韓劇live而且停不下來 <a href="">#光洙水ㄛ</a><br />
-<code>Esther</code>: 是個有趣的人，謝謝會跟我聊韓團跟韓劇的愛斯特 <a href="">#iloveiu</a><br />
-<code>Patrick</code>: 在想不到要怎麼呈現資料還有忘記統計觀念的時候當我的顧問 #派翠畢業快樂<br />
-<code>Pohua</code>: 溫柔敦厚的大學摯友，謝謝最暖柏樺 <a href="">#to_be_a_better_man</a><br />
-<code>Vivian</code>: 一開始被我拉來這堂課結果最後停修了，謝謝你陪我上課，結果我報告做的那麼美害我很不好意思 <a href="">#臉圓圓</a></p>
+<p>最後我想要感謝與這份報告有關的人</p>
+<p>老師與助教: 謝謝老師帶我深入 R 的世界，自學有時候很煩可是做出來真的超有成就<br />
+臺元: 謝謝臺元幫我釐清非常的疑惑，要資料、欄位解釋、學代生態等，有太大的幫助<br />
+選委會與學代會小編: 兩邊的小編都直接幫我找歷史檔案，真的很謝謝你們</p>
+<p>然後是這些人雖然跟這堂課無關，可是他們在大三下扮演了很重要的角色，希望可以繼續</p>
+<p>Dennis: 這是我自己，我好棒喔 #我的大叔<br />
+Daniel: 高中以來的好朋友，我猜你現在看韓劇live而且停不下來 #光洙水ㄛ<br />
+Esther: 是個有趣的人，謝謝會跟我聊韓團跟韓劇的愛斯特 #iloveiu<br />
+Patrick: 在想不到要怎麼呈現資料還有忘記統計觀念的時候當我的顧問 #派翠畢業快樂<br />
+Pohua: 溫柔敦厚的大學摯友，謝謝最暖柏樺 #to_be_a_better_man<br />
+Vivian: 一開始被我拉來這堂課結果最後停修了，謝謝你陪我上課，結果我報告做的那麼美害我很不好意思 #臉圓圓</p>
+<p>2019.06.23.: 第一版完成 2019.07.28.: 沒想到有好事發生~ 恭喜我的摯友們上班和下班時間可以作伴 2019.08.04.: 第二版完成</p>
 </div>
 
 

@@ -38,7 +38,9 @@ data_pornot <- df_sc_attnd %>%
     by = c("term", "keys")
   ) %>%
   mutate(college = factor(college), term = factor(term), `會期` = as.factor(`會期`))
-data_pornot %>% head() %>% knitr::kable() %>% kableExtra::kable_styling()
+data_pornot %>% head() %>% 
+  select(term, degree, college, dept, start, end, name, grade, general, keys, Attnd, concentration) %>%
+  knitr::kable() %>% kableExtra::kable_styling()
 ```
   
 ### **NTUSC Vote Data**
@@ -48,5 +50,7 @@ data_pornot %>% head() %>% knitr::kable() %>% kableExtra::kable_styling()
 **Data size:**  287 observations * 19 variables  
 **Data Overview:**  
 ```{r message = FALSE, warning = FALSE, echo = FALSE}
-df_vote_college %>% head() %>% knitr::kable() %>% kableExtra::kable_styling()
+df_vote_college %>% head() %>%
+  select(start,	end,	college,	name,	elected,	vote_support,	vote_object,	vote_invalid,	college_population) %>%
+  knitr::kable() %>% kableExtra::kable_styling()
 ```

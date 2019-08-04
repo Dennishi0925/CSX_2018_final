@@ -1,4 +1,11 @@
 /* Whole document: */
 body{
  font-family: Microsoft JhengHei;
+font-size: 16px;
+}
+code.r{
+  font-size: 14px;
+}
+pre {
+  font-size: 16px
 }
