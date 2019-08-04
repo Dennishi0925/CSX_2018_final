@@ -13,7 +13,7 @@ font_add("jh", "msjh.ttc")
 
 NTUSC是台大學代會的簡稱，其全名為 National Taiwan University Student Congress(國立臺灣大學學生會學生代表大會)，是台大學生自治的立法機關，由全體學生選舉所組成，和代表行政的學生會以及代表司法的學生法院形成三權互相制衡，其職責為代表學生爭取學生權利並監督學生會施政。
 
-近來由於諸多議題如[中國新歌聲演唱會場地爭議](https://udn.com/news/story/6656/2732448)與[管中閔台大校長遴選爭議](https://www.upmedia.mg/news_info.php?SerialNo=40250)等有台大學代的參與，又因為媒體報導與網友關注，使得[台大學代低投票率](https://udn.com/news/story/11744/3136612)成為新聞報導的話題，也有[網友批評](https://udn.com/news/story/6656/3169818)，台大學代已經被特定政治力量所把持。
+近來由於諸多議題如[中國新歌聲演唱會場地爭議](https://udn.com/news/story/6656/2732448)與[管中閔台大校長遴選爭議](https://www.upmedia.mg/news_info.php?SerialNo=40250)等都有台大學代的參與，又因為媒體報導與網友關注，使得[台大學代低投票率](https://udn.com/news/story/11744/3136612)成為新聞報導的話題，也有[網友批評](https://udn.com/news/story/6656/3169818)，台大學代已經被特定政治力量所把持。
 
 
 ### **Why NTUSC?**
