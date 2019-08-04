@@ -1,0 +1,36 @@
+---
+title: "Shiny and Thanks"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(showtext)
+showtext_auto()
+font_add("jh", "msjh.ttc")
+```
+
+
+### **NTUSC Shiny APP**
+
+點下 [**NTUSC app**](https://dennistseng.shinyapps.io/NTUSCapp/) 就可以看到最後 shiny app的成果了。
+
+### **Thank you all**
+
+最後我想要感謝與這份報告有關的人   
+
+老師與助教: 謝謝老師帶我深入 R 的世界，自學有時候很煩可是做出來真的超有成就  
+臺元: 謝謝臺元幫我釐清非常的疑惑，要資料、欄位解釋、學代生態等，有太大的幫助  
+選委會與學代會小編: 兩邊的小編都直接幫我找歷史檔案，真的很謝謝你們  
+
+然後是這些人雖然跟這堂課無關，可是他們在大三下扮演了很重要的角色，希望可以繼續   
+
+Dennis: 這是我自己，我好棒喔 #我的大叔  
+Daniel: 高中以來的好朋友，我猜你現在看韓劇live而且停不下來 #光洙水ㄛ  
+Esther: 是個有趣的人，謝謝會跟我聊韓團跟韓劇的愛斯特 #iloveiu  
+Patrick: 在想不到要怎麼呈現資料還有忘記統計觀念的時候當我的顧問 #派翠畢業快樂  
+Pohua: 溫柔敦厚的大學摯友，謝謝最暖柏樺 #to_be_a_better_man  
+Vivian: 一開始被我拉來這堂課結果最後停修了，謝謝你陪我上課，結果我報告做的那麼美害我很不好意思 #臉圓圓  
+  
+2019.06.23.: 第一版完成
+2019.07.28.: 沒想到有好事發生~ 恭喜我的摯友們上班和下班時間可以作伴
+2019.08.04.: 第二版完成

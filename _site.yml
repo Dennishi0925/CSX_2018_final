@@ -20,6 +20,9 @@ navbar:
     - text: "Communicating"
       icon: fa-newspaper-o
       href: data_communicating.html
+    - text: "Shiny & Thanks"
+      icon: fa-newspaper-o
+      href: shiny_thanks.html
 output:
   html_document:
     theme: united
