@@ -1,0 +1,27 @@
+"0","    data_pornot %>%
+      filter(term == ""1061"") %>%
+      select(college, grade, dept, name, term, `會期`, present) %>%
+      mutate(dummyp = if_else(present == ""not"", 0, 1)) %>%
+      group_by(college, `會期`) %>%
+      mutate(`出席率` = sum(dummyp)/n()) %>%
+    ggplot(aes(x = `會期`, y = college, fill = `出席率`)) +
+      geom_tile() +
+      scale_fill_gradient(high = ""darkblue"", low = ""white"", labels = scales::percent_format(accuracy = 1L)) +
+      guides(fill = guide_legend(title.position=""top"", reverse=T)) +
+      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            panel.grid.major.y = element_line(colour = ""grey"", linetype = ""dashed""),
+            axis.line = element_line(colour = ""black""))
+"
+"2","Warning messages:
+"
+"2","1: "
+"2","In strsplit(x, ""\n"") :"
+"2"," input string 1 is invalid in this locale
+"
+"2","2: "
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"

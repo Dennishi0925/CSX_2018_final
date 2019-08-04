@@ -1,0 +1,32 @@
+---
+title: "Data Modeling"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### **Brief Introduction**
+
+由於最重要的變數為學代出席率，因此我嘗試尋找兩份資料當中的變數與學貸出席率的關係。我用了院別、年級、任期、各式投票率如廢票率、支持率、院別人口比例等，很遺憾的是所有線性回歸模型的解釋能力都有點差，所以底下就直接呈現其中幾個(失敗的)模型。
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+library(tidyverse)
+data_pornot <- read_rds("D:/R_programming/Journalism_homework/NTUSC/datapor") %>% select(-c(X1, ID))
+data_lm <- read_rds("D:/R_programming/Journalism_homework/NTUSC/datalm")
+mm <- model.matrix( ~ college - 1, data= data_lm )
+data <- cbind(data_lm, mm) %>% as_tibble()
+```
+
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+model <- lm(formula= Attnd_Rate ~ support_rate + nonobj_Rate*competitive + vote_rate + competitive + void_rate + college_population_rate,
+            data=data)
+summary(model)
+model3 <- lm(formula= Attnd_Rate ~ support_rate + vote_rate,
+             data=data_lm)
+summary(model3)
+model4 <- lm(formula= Attnd_Rate ~ vote_rate,
+             data=data_lm)
+summary(model4)
+```

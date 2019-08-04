@@ -1,0 +1,17 @@
+"0","df_vote_college %>% dim()
+"
+"1","[1]"
+"1"," 287"
+"1","  19"
+"1","
+"
+"2","Warning messages:
+"
+"2","1: "
+"2","In strsplit(x, ""\n"") :"
+"2"," input string 1 is invalid in this locale
+"
+"2","2: "
+"2","In strsplit(x, ""\n"") :"
+"2"," input string 1 is invalid in this locale
+"

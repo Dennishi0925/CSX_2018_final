@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1564930675772.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "941B5C16",
+    "lastKnownWriteTime" : 1564929431,
+    "last_content_update" : 1564929431,
+    "path" : "D:/GitHub/CSX_2018_final/data_visualizing.Rmd",
+    "project_path" : "data_visualizing.Rmd",
+    "properties" : {
+        "cursorPosition" : "31,80",
+        "last_setup_crc32" : "EB6CEE08bb338d19",
+        "scrollLine" : "25"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

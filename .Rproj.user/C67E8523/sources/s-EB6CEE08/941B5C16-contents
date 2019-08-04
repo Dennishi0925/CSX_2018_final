@@ -1,0 +1,95 @@
+---
+title: "Data Visualizing"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### **NTUSC Attendance Data**
+
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+library(tidyverse)
+df_vote_college <- read_rds("df_vote_college")
+df_sc_attnd <- read_rds("df_sc_attnd_university")
+
+data_pornot <- df_sc_attnd %>% 
+  mutate(`出缺席狀況` = Attnd,
+         present = case_when(Attnd == '出席' ~ "出席", TRUE ~ "not")) %>%
+  rename(keys = session) %>%
+  mutate(term = as.integer(str_c(str_sub(term, 1, 3), str_sub(term,5,5)))) %>%
+  left_join(
+    df_sc_attnd %>%
+      distinct(term, session) %>%
+      group_by(term) %>% 
+      rename(keys = session) %>%
+      mutate(`會期` = row_number()) %>%
+      ungroup() %>%
+      mutate(term = as.integer(str_c(str_sub(term, 1, 3), str_sub(term,5,5)))),
+    by = c("term", "keys")
+  ) %>%
+  mutate(college = factor(college), term = factor(term), `會期` = as.factor(`會期`))
+```
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+data_pornot %>%
+  filter(term == "1061") %>%
+  select(college, start, end, name, dept, grade, `出缺席狀況`) %>%
+  group_by(college, `出缺席狀況`) %>%
+  count() %>%
+  ungroup %>%
+  group_by(college) %>%
+  mutate(percent = n/sum(n), total = sum(n)) %>%
+  arrange(desc(n)) %>%
+  ungroup %>%
+  ggplot(aes(x = college, y = percent, fill = `出缺席狀況`)) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1L)) + 
+  coord_flip() + 
+  scale_fill_manual(values = c("#D73027", "#FDAE61", "#74ADD1", "#4575B4")) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_rect('#ecf0f1'),
+        panel.grid.major.y = element_line(colour = "grey", linetype = "dashed"),
+        axis.line = element_line(colour = "black"))
+```
+
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+    data_pornot %>%
+      filter(term == "1061") %>%
+      select(college, grade, dept, name, term, `會期`, present) %>%
+      mutate(dummyp = if_else(present == "not", 0, 1)) %>%
+      group_by(college, `會期`) %>%
+      mutate(`出席率` = sum(dummyp)/n()) %>%
+    ggplot(aes(x = `會期`, y = college, fill = `出席率`)) +
+      geom_tile() +
+      scale_fill_gradient(high = "darkblue", low = "white", labels = scales::percent_format(accuracy = 1L)) +
+      guides(fill = guide_legend(title.position="top", reverse=T)) +
+      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            panel.grid.major.y = element_line(colour = "grey", linetype = "dashed"),
+            axis.line = element_line(colour = "black"))
+```
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+data_pornot %>% 
+    filter(term == "1041") %>%
+    group_by(`會期`, `出缺席狀況`) %>%
+    count() %>%
+    ungroup() %>%
+    group_by(`會期`) %>%
+    mutate(percent = n/sum(n)) %>%
+  ggplot() +
+      geom_line(aes(x = `會期`, y = percent, group = 1, colour=factor(`出缺席狀況`)), size = 1) +
+      geom_point(aes(x = `會期`, y = percent, group = 1, colour=factor(`出缺席狀況`)), size = 2) +
+      guides(fill=guide_legend(title="present")) +
+      facet_grid(.~`出缺席狀況`) +
+      scale_colour_manual(values = c("#D73027", "#FDAE61", "#74ADD1", "#4575B4"), guide="none") +
+      scale_y_continuous(labels =  scales::percent_format(accuracy = 1L)) +
+      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_rect('#ecf0f1', color = "black"),
+            panel.grid.major.y = element_line(colour = "grey", linetype = "dashed"),
+            axis.line = element_line(colour = "black")) +
+      theme(strip.background = element_rect(colour = "black", fill = "white"))
+```

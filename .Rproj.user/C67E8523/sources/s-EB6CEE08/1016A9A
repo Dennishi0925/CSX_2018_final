@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1564931110853.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2452508919",
+    "id" : "1016A9A",
+    "lastKnownWriteTime" : 1529753495,
+    "last_content_update" : 1529753495,
+    "path" : "D:/GitHub/CSX_2018_final/data_processing.Rmd",
+    "project_path" : "data_processing.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

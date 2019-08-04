@@ -1,0 +1,19 @@
+"0","data_pornot %>% dim()
+"
+"1","[1]"
+"1"," 3042"
+"1","   18"
+"1","
+"
+"2","Warning messages:
+"
+"2","1: "
+"2","In strsplit(x, ""\n"") :"
+"2"," input string 1 is invalid in this locale
+"
+"2","2: "
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"

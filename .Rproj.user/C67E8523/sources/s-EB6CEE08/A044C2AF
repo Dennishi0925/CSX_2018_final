@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1564931129960.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2751702033",
+    "id" : "A044C2AF",
+    "lastKnownWriteTime" : 1564931486,
+    "last_content_update" : 1564931486495,
+    "path" : "D:/GitHub/CSX_2018_final/data_modeling.Rmd",
+    "project_path" : "data_modeling.Rmd",
+    "properties" : {
+        "cursorPosition" : "20,0",
+        "last_setup_crc32" : "EB6CEE085699fe6c",
+        "scrollLine" : "19"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

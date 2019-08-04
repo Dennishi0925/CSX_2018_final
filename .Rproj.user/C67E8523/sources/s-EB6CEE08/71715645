@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1564319368858.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1997564410",
+    "id" : "71715645",
+    "lastKnownWriteTime" : 1529758157,
+    "last_content_update" : 1529758157,
+    "path" : "D:/GitHub/CSX_2018_final/data_communicating.Rmd",
+    "project_path" : "data_communicating.Rmd",
+    "properties" : {
+        "cursorPosition" : "10,57",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

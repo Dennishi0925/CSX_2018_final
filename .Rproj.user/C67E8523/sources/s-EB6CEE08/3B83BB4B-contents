@@ -1,0 +1,52 @@
+---
+title: "Scope of Data"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### **Brief Introduction**
+
+資料主要有二份，一份是台大學代出席資料，另一份則是台大學代投票資料。前者可以從台大學代會的臉書搜尋而得，後則可以從台大選委會的臉書搜尋而得，但因為有些已經是歷史資料，所以我直接向粉絲專頁傳送訊息，兩方的小編都直接幫我將檔案找出了，非常感謝他們。另外因為考慮到研究生的特殊性質，譬如說系所和年級和大學部同學相同，但實際生活與求學環境相去甚遠，過濾掉了學代中的研究生，僅留下大學部學代。
+
+### **NTUSC Attendance Data**
+
+**Data description:** NTUSC attendance data of each session  
+**Data range:** 104-1 ~ 106-1  
+**Data size:** 3042 observations * 13 variables   
+**Data Overview:**  
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+df_vote_college <- read_rds("df_vote_college")
+df_sc_attnd <- read_rds("df_sc_attnd_university")
+data_pornot <- df_sc_attnd %>% 
+  mutate(`出缺席狀況` = Attnd,
+         present = case_when(Attnd == '出席' ~ "出席", TRUE ~ "not")) %>%
+  rename(keys = session) %>%
+  mutate(term = as.integer(str_c(str_sub(term, 1, 3), str_sub(term,5,5)))) %>%
+  left_join(
+    df_sc_attnd %>%
+      distinct(term, session) %>%
+      group_by(term) %>% 
+      rename(keys = session) %>%
+      mutate(`會期` = row_number()) %>%
+      ungroup() %>%
+      mutate(term = as.integer(str_c(str_sub(term, 1, 3), str_sub(term,5,5)))),
+    by = c("term", "keys")
+  ) %>%
+  mutate(college = factor(college), term = factor(term), `會期` = as.factor(`會期`))
+data_pornot %>% head() %>% knitr::kable() %>% kableExtra::kable_styling()
+```
+  
+### **NTUSC Vote Data**
+
+**Data description:** NTUSC vote data of each term  
+**Data range:** 104-1 ~ 106-1  
+**Data size:**  287 observations * 19 variables  
+**Data Overview:**  
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+df_vote_college %>% head() %>% knitr::kable() %>% kableExtra::kable_styling()
+```
