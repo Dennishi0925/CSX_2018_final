@@ -11,3 +11,40 @@ font_add("jh", "msjh.ttc")
 
 ### **Brief Introduction**
 
+由於最重要的變數為學代出席率，因此我嘗試尋找兩份資料當中的變數與學貸出席率的關係。我用了院別、年級、任期、各式投票率如廢票率、支持率、院別人口比例等，很遺憾的是所有線性回歸模型的解釋能力都有點差，所以底下就直接呈現其中幾個(失敗的)模型。
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+library(tidyverse)
+df_sc_attnd <- read_rds("df_sc_attnd_university")
+df_attnd_vote <- read_rds("df_attnd_vote") %>% rename(`出席率` = Attnd_Rate)
+
+data_pornot <- df_sc_attnd %>% 
+  mutate(`出缺席狀況` = Attnd,
+         present = case_when(Attnd == '出席' ~ "出席", TRUE ~ "not")) %>%
+  rename(keys = session) %>%
+  mutate(term = as.integer(str_c(str_sub(term, 1, 3), str_sub(term,5,5)))) %>%
+  left_join(
+    df_sc_attnd %>%
+      distinct(term, session) %>%
+      group_by(term) %>% 
+      rename(keys = session) %>%
+      mutate(`會期` = row_number()) %>%
+      ungroup() %>%
+      mutate(term = as.integer(str_c(str_sub(term, 1, 3), str_sub(term,5,5)))),
+    by = c("term", "keys")
+  ) %>%
+  mutate(college = factor(college), term = factor(term), `會期` = as.factor(`會期`))
+# df_attnd_vote <- read_rds("D:/R_programming/Journalism_homework/NTUSC/datalm")
+mm <- model.matrix( ~ college - 1, data= df_attnd_vote )
+data <- cbind(df_attnd_vote, mm) %>% as_tibble()
+```
+
+
+```{r message = FALSE, warning = FALSE, echo = FALSE}
+model <- lm(formula= `出席率` ~ college_vote_rate + college_vote_rate + competitive +  college_population_rate,
+            data=data)
+summary(model)
+model4 <- lm(formula= `出席率` ~ college_vote_rate,
+             data=df_attnd_vote)
+summary(model4)
+```
