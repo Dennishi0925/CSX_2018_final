@@ -20,9 +20,11 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -31,10 +33,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -69,9 +73,7 @@ h6 {
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -90,8 +92,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -107,7 +115,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -127,6 +134,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -148,19 +192,85 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -185,22 +295,46 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="scope.html">Scope</a>
+  <a href="scope.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Scope
+  </a>
 </li>
 <li>
-  <a href="data_processing.html">Processing</a>
+  <a href="data_processing.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Processing
+  </a>
 </li>
 <li>
-  <a href="data_visualizing.html">Visualizing</a>
+  <a href="data_visualizing.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Visualizing
+  </a>
 </li>
 <li>
-  <a href="data_modeling.html">Modeling</a>
+  <a href="data_modeling.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Modeling
+  </a>
 </li>
 <li>
-  <a href="data_communicating.html">Communicating</a>
+  <a href="data_communicating.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Communicating
+  </a>
 </li>
 <li>
-  <a href="shiny_thanks.html">Shiny &amp; Thanks</a>
+  <a href="shiny_thanks.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Shiny &amp; Thanks
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -221,212 +355,837 @@ $(document).ready(function () {
 
 <div id="brief-introduction" class="section level3">
 <h3><strong>Brief Introduction</strong></h3>
-<p>資料主要有二份，一份是台大學代出席資料，另一份則是台大學代投票資料。前者可以從台大學代會的臉書搜尋而得，後則可以從台大選委會的臉書搜尋而得，但因為有些已經是歷史資料，所以我直接向粉絲專頁傳送訊息，兩方的小編都直接幫我將檔案找出了，非常感謝他們。</p>
+<p>資料主要有二份，一份是台大學代出席資料，另一份則是台大學代投票資料。前者可以從台大學代會的臉書搜尋而得，後則可以從台大選委會的臉書搜尋而得，但因為有些已經是歷史資料，所以我直接向粉絲專頁傳送訊息，兩方的小編都直接幫我將檔案找出了，非常感謝他們。另外因為考慮到研究生的特殊性質，譬如說系所和年級和大學部同學相同，但實際生活與求學環境相去甚遠，過濾掉了學代中的研究生，僅留下大學部學代。</p>
 </div>
 <div id="ntusc-attendance-data" class="section level3">
 <h3><strong>NTUSC Attendance Data</strong></h3>
-<p><strong>Data description:</strong> NTUSC attendance data of each session<br />
+<strong>Data description:</strong> NTUSC attendance data of each session<br />
 <strong>Data range:</strong> 104-1 ~ 106-1<br />
-<strong>Data size:</strong> 3843 observations * 13 variables<br />
-<strong>Data Overview:</strong></p>
-<table>
+<strong>Data size:</strong> 3042 observations * 13 variables<br />
+<strong>Data Overview:</strong><br />
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">college</th>
-<th align="left">start</th>
-<th align="left">end</th>
-<th align="left">name</th>
-<th align="left">dept</th>
-<th align="right">grade</th>
-<th align="left">general</th>
-<th align="right">term</th>
-<th align="left">keys</th>
-<th align="left">values</th>
-<th align="left">present</th>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:left;">
+degree
+</th>
+<th style="text-align:left;">
+college
+</th>
+<th style="text-align:left;">
+dept
+</th>
+<th style="text-align:left;">
+start
+</th>
+<th style="text-align:left;">
+end
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:right;">
+grade
+</th>
+<th style="text-align:left;">
+general
+</th>
+<th style="text-align:left;">
+keys
+</th>
+<th style="text-align:left;">
+Attnd
+</th>
+<th style="text-align:left;">
+dept_english
+</th>
+<th style="text-align:left;">
+college_english
+</th>
+<th style="text-align:left;">
+concentration
+</th>
+<th style="text-align:left;">
+college_english_ab
+</th>
+<th style="text-align:left;">
+出缺席狀況
+</th>
+<th style="text-align:left;">
+present
+</th>
+<th style="text-align:left;">
+會期
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">文學院</td>
-<td align="left">103-2</td>
-<td align="left">104-1</td>
-<td align="left">黃申</td>
-<td align="left">歷史系</td>
-<td align="right">4</td>
-<td align="left">1041_current</td>
-<td align="right">1041</td>
-<td align="left">1041_prep_0915</td>
-<td align="left">present</td>
-<td align="left">present</td>
+<tr>
+<td style="text-align:left;">
+1041
+</td>
+<td style="text-align:left;">
+大學部
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+歷史系
+</td>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+黃申
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+current
+</td>
+<td style="text-align:left;">
+1041_prep_0915
+</td>
+<td style="text-align:left;">
+出席
+</td>
+<td style="text-align:left;">
+Hist
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+first
+</td>
+<td style="text-align:left;">
+LA
+</td>
+<td style="text-align:left;">
+出席
+</td>
+<td style="text-align:left;">
+出席
+</td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">文學院</td>
-<td align="left">103-2</td>
-<td align="left">104-1</td>
-<td align="left">樓彥成</td>
-<td align="left">中文系</td>
-<td align="right">4</td>
-<td align="left">1041_current</td>
-<td align="right">1041</td>
-<td align="left">1041_prep_0915</td>
-<td align="left">skip</td>
-<td align="left">not</td>
+<tr>
+<td style="text-align:left;">
+1041
+</td>
+<td style="text-align:left;">
+大學部
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+中文系
+</td>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+樓彥成
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+current
+</td>
+<td style="text-align:left;">
+1041_prep_0915
+</td>
+<td style="text-align:left;">
+未請假缺席
+</td>
+<td style="text-align:left;">
+CHIN
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+first
+</td>
+<td style="text-align:left;">
+LA
+</td>
+<td style="text-align:left;">
+未請假缺席
+</td>
+<td style="text-align:left;">
+not
+</td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">文學院</td>
-<td align="left">103-2</td>
-<td align="left">104-1</td>
-<td align="left">周允梵</td>
-<td align="left">哲學系</td>
-<td align="right">2</td>
-<td align="left">1041_current</td>
-<td align="right">1041</td>
-<td align="left">1041_prep_0915</td>
-<td align="left">present</td>
-<td align="left">present</td>
+<tr>
+<td style="text-align:left;">
+1041
+</td>
+<td style="text-align:left;">
+大學部
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+哲學系
+</td>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+周允梵
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+current
+</td>
+<td style="text-align:left;">
+1041_prep_0915
+</td>
+<td style="text-align:left;">
+出席
+</td>
+<td style="text-align:left;">
+Phl
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+first
+</td>
+<td style="text-align:left;">
+LA
+</td>
+<td style="text-align:left;">
+出席
+</td>
+<td style="text-align:left;">
+出席
+</td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">文學院</td>
-<td align="left">103-2</td>
-<td align="left">104-1</td>
-<td align="left">陳俊臣</td>
-<td align="left">哲學系</td>
-<td align="right">2</td>
-<td align="left">1041_current</td>
-<td align="right">1041</td>
-<td align="left">1041_prep_0915</td>
-<td align="left">leave</td>
-<td align="left">not</td>
+<tr>
+<td style="text-align:left;">
+1041
+</td>
+<td style="text-align:left;">
+大學部
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+哲學系
+</td>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+陳俊臣
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+current
+</td>
+<td style="text-align:left;">
+1041_prep_0915
+</td>
+<td style="text-align:left;">
+請假缺席
+</td>
+<td style="text-align:left;">
+Phl
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+first
+</td>
+<td style="text-align:left;">
+LA
+</td>
+<td style="text-align:left;">
+請假缺席
+</td>
+<td style="text-align:left;">
+not
+</td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">文學院</td>
-<td align="left">103-2</td>
-<td align="left">104-1</td>
-<td align="left">牛許時</td>
-<td align="left">戲劇系</td>
-<td align="right">2</td>
-<td align="left">1041_current</td>
-<td align="right">1041</td>
-<td align="left">1041_prep_0915</td>
-<td align="left">skip</td>
-<td align="left">not</td>
+<tr>
+<td style="text-align:left;">
+1041
+</td>
+<td style="text-align:left;">
+大學部
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+戲劇系
+</td>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+牛許時
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+current
+</td>
+<td style="text-align:left;">
+1041_prep_0915
+</td>
+<td style="text-align:left;">
+未請假缺席
+</td>
+<td style="text-align:left;">
+Thea
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+first
+</td>
+<td style="text-align:left;">
+LA
+</td>
+<td style="text-align:left;">
+未請假缺席
+</td>
+<td style="text-align:left;">
+not
+</td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">文學院</td>
-<td align="left">103-2</td>
-<td align="left">104-1</td>
-<td align="left">劉宇珺</td>
-<td align="left">日文系</td>
-<td align="right">4</td>
-<td align="left">1041_current</td>
-<td align="right">1041</td>
-<td align="left">1041_prep_0915</td>
-<td align="left">skip</td>
-<td align="left">not</td>
+<tr>
+<td style="text-align:left;">
+1041
+</td>
+<td style="text-align:left;">
+大學部
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+日文系
+</td>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+劉宇珺
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+current
+</td>
+<td style="text-align:left;">
+1041_prep_0915
+</td>
+<td style="text-align:left;">
+未請假缺席
+</td>
+<td style="text-align:left;">
+JpnL
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+first
+</td>
+<td style="text-align:left;">
+LA
+</td>
+<td style="text-align:left;">
+未請假缺席
+</td>
+<td style="text-align:left;">
+not
+</td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="ntusc-vote-data" class="section level3">
 <h3><strong>NTUSC Vote Data</strong></h3>
-<p><strong>Data description:</strong> NTUSC vote data of each term<br />
+<strong>Data description:</strong> NTUSC vote data of each term<br />
 <strong>Data range:</strong> 104-1 ~ 106-1<br />
-<strong>Data size:</strong> 186 observations * 11 variables<br />
-<strong>Data Overview:</strong></p>
-<table>
+<strong>Data size:</strong> 287 observations * 19 variables<br />
+<strong>Data Overview:</strong><br />
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">college</th>
-<th align="left">name</th>
-<th align="left">dept</th>
-<th align="left">term</th>
-<th align="right">Attnd_Rate</th>
-<th align="right">support_rate</th>
-<th align="right">nonobj_Rate</th>
-<th align="right">vote_rate</th>
-<th align="left">competitive</th>
-<th align="right">void_rate</th>
-<th align="right">college_population_rate</th>
+<tr>
+<th style="text-align:left;">
+start
+</th>
+<th style="text-align:left;">
+end
+</th>
+<th style="text-align:left;">
+college
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:right;">
+elected
+</th>
+<th style="text-align:right;">
+vote_support
+</th>
+<th style="text-align:right;">
+vote_object
+</th>
+<th style="text-align:right;">
+vote_invalid
+</th>
+<th style="text-align:right;">
+college_population
+</th>
+<th style="text-align:right;">
+college_population_total
+</th>
+<th style="text-align:right;">
+college_population_rate
+</th>
+<th style="text-align:right;">
+college_vote_population
+</th>
+<th style="text-align:right;">
+college_vote_rate
+</th>
+<th style="text-align:right;">
+college_support_vote
+</th>
+<th style="text-align:right;">
+college_support_rate
+</th>
+<th style="text-align:right;">
+competitive
+</th>
+<th style="text-align:right;">
+college_vote_invalid
+</th>
+<th style="text-align:left;">
+college_english
+</th>
+<th style="text-align:left;">
+college_english_ab
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">工學院</td>
-<td align="left">王羿方</td>
-<td align="left">土木系</td>
-<td align="left">105-2</td>
-<td align="right">1.00</td>
-<td align="right">0</td>
-<td align="right">0.44</td>
-<td align="right">0.02</td>
-<td align="left">0</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
+<tr>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+黃申
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+3178
+</td>
+<td style="text-align:right;">
+32489
+</td>
+<td style="text-align:right;">
+0.0978177
+</td>
+<td style="text-align:right;">
+211
+</td>
+<td style="text-align:right;">
+0.066394
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+0.1352657
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+LA
+</td>
 </tr>
-<tr class="even">
-<td align="left">工學院</td>
-<td align="left">周維理</td>
-<td align="left">土木系</td>
-<td align="left">104-1</td>
-<td align="right">0.50</td>
-<td align="right">0</td>
-<td align="right">0.29</td>
-<td align="right">0.03</td>
-<td align="left">0</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
+<tr>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+樓彥成
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+3178
+</td>
+<td style="text-align:right;">
+32489
+</td>
+<td style="text-align:right;">
+0.0978177
+</td>
+<td style="text-align:right;">
+211
+</td>
+<td style="text-align:right;">
+0.066394
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+0.0772947
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+LA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">工學院</td>
-<td align="left">張聿棨</td>
-<td align="left">土木系</td>
-<td align="left">104-2</td>
-<td align="right">0.57</td>
-<td align="right">0</td>
-<td align="right">0.59</td>
-<td align="right">0.01</td>
-<td align="left">0</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
+<tr>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+周允梵
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+3178
+</td>
+<td style="text-align:right;">
+32489
+</td>
+<td style="text-align:right;">
+0.0978177
+</td>
+<td style="text-align:right;">
+211
+</td>
+<td style="text-align:right;">
+0.066394
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+0.2173913
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+LA
+</td>
 </tr>
-<tr class="even">
-<td align="left">工學院</td>
-<td align="left">駱建澄</td>
-<td align="left">土木系</td>
-<td align="left">104-1</td>
-<td align="right">0.55</td>
-<td align="right">0</td>
-<td align="right">0.24</td>
-<td align="right">0.03</td>
-<td align="left">0</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
+<tr>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+陳俊臣
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+3178
+</td>
+<td style="text-align:right;">
+32489
+</td>
+<td style="text-align:right;">
+0.0978177
+</td>
+<td style="text-align:right;">
+211
+</td>
+<td style="text-align:right;">
+0.066394
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+0.1884058
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+LA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">工學院</td>
-<td align="left">林冠廷</td>
-<td align="left">工工所</td>
-<td align="left">105-1</td>
-<td align="right">0.80</td>
-<td align="right">0</td>
-<td align="right">0.51</td>
-<td align="right">0.03</td>
-<td align="left">0</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
+<tr>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+翁毓聆
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+3178
+</td>
+<td style="text-align:right;">
+32489
+</td>
+<td style="text-align:right;">
+0.0978177
+</td>
+<td style="text-align:right;">
+211
+</td>
+<td style="text-align:right;">
+0.066394
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+0.2028986
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+LA
+</td>
 </tr>
-<tr class="even">
-<td align="left">工學院</td>
-<td align="left">林後維</td>
-<td align="left">工海系</td>
-<td align="left">104-2</td>
-<td align="right">0.86</td>
-<td align="right">0</td>
-<td align="right">0.42</td>
-<td align="right">0.01</td>
-<td align="left">0</td>
-<td align="right">0</td>
-<td align="right">0.16</td>
+<tr>
+<td style="text-align:left;">
+103-2
+</td>
+<td style="text-align:left;">
+104-1
+</td>
+<td style="text-align:left;">
+文學院
+</td>
+<td style="text-align:left;">
+牛許時
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+3178
+</td>
+<td style="text-align:right;">
+32489
+</td>
+<td style="text-align:right;">
+0.0978177
+</td>
+<td style="text-align:right;">
+211
+</td>
+<td style="text-align:right;">
+0.066394
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+0.0676329
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Liberal Arts
+</td>
+<td style="text-align:left;">
+LA
+</td>
 </tr>
 </tbody>
 </table>
